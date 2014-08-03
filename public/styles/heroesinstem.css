@@ -1,0 +1,18 @@
+body{
+	color:gray;
+	margin:20px;
+	
+}
+
+.picture{
+	max-height:300px;
+	margin:20px;
+	float:left;
+}
+.description{
+	color:teal;
+}
+.tags{
+	clear:both;
+}
+

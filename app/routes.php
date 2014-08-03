@@ -13,5 +13,45 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('home');
+});
+
+Route::get('/list', function()
+{
+
+	$heroList=  new HeroList(app_path().'/database/heroes.json');
+	$query = Input::get('query');
+	if($query){
+		//search for query 
+		$heroes = $heroList->search($query);
+	}
+	else{
+		//get all heroes
+		$heroes = $heroList->get_heroes();
+
+	}
+	return View::make('list')
+		->with('heroes', $heroes)
+		->with('query', $query);
+});
+
+Route::get('/profile', function()
+{
+	return View::make('profile');
+});
+
+Route::get('/hero/', function() {
+	return View::make('hero');
+});
+
+ Route::get('/hero/edit/{hero}', function() {
+
+});
+
+  Route::get('hero/add/', function() {
+  	return View::make('addHero');
+});
+
+  Route::post('hero/add/', function() {
+  	return View::make('hero');
 });
