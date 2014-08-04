@@ -15,9 +15,13 @@ Welcome to HERoes In STEM
 
 {{ Form::open(array('url' => '/hero/add', 'method' => 'POST')) }}
 
-{{ Form::label('query','Add a new HERo:') }} &nbsp;
-{{ Form::text('query') }} &nbsp;
-{{ Form::submit('Add HERo!') }}
+	Name: {{ Form::text('name') }} <br>
+	Desciption: {{ Form::text('description') }} <br>
+	Year of Birth (YYYY): {{ Form::text('born') }} <br>
+	Picture URL: {{ Form::text('photo') }} <br>
+	Link to WikiPage: {{ Form::text('more_info_link') }} <br>
+
+	{{ Form::submit('Add this new HERo!') }}
 
 {{ Form::close() }}
 

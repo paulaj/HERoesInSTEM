@@ -35,21 +35,19 @@ Welcome to HERoes In STEM
 @foreach($heroes as $name => $hero)
 
 	<section>
-	<h2>{{ $name }}</h2>
-	<img class='picture' src='{{ $hero['picture'] }}'>
+	<h2>{{ $hero['name'] }}</h2>
+	<img class='picture' src='{{ $hero['photo'] }}'>
 	
 
 	<div class='description'>
-	About: {{ $hero['description'] }} <br/>
+	{{ $hero['description'] }} <br/>
 	</div>
 
 	<div class='tags'>
-	Tags:
-	@foreach($hero['tags'] as $tag)
-	<em>{{ $tag }},</em>
-	@endforeach
-	</div>
-	<a href='{{ $hero['wikiLink'] }}'> Go to Wikipedia Entry</a>
+	
+	
+	</div> 
+	<a href='{{ $hero['more_info_link'] }}'> Go to Wikipedia Entry</a> |<a href='/hero/add'>+ Add this hero to your HERoes.</a> |<a href='/hero/edit'> Edit hero</a>
 	
 
 	</section>
