@@ -16,3 +16,10 @@ body{
 	clear:both;
 }
 
+.info{
+	width:50%;
+	text-indent:50px;
+}
+.flash-message{
+	color:white;
+}

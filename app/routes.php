@@ -16,43 +16,128 @@ Route::get('/', function()
 	return View::make('home');
 });
 
-Route::get('/list', function()
-{
-	// $heroList=  new HeroList(app_path().'/database/heroes.json');
-	$query = Input::get('query');
-	if($query){
-		//search for query 
-		//$heroes = $heroList->search($query);
-			$heroes = Hero::where('name', 'LIKE', "%$query%")
-				->get();
-	}
-	else{
-		//get all heroes
-		//$heroes = $heroList->get_heroes();
-		$heroes = Hero::all();
 
-	}
-	return View::make('list')
-		->with('heroes', $heroes)
-		->with('query', $query);
+Route::get('/signup',
+    array(
+        'before' => 'guest',
+        function() {
+            return View::make('signup');
+        }
+    )
+);
+
+Route::post('/signup', 
+    array(
+        'before' => 'csrf', 
+        function() {
+
+            $user = new User;
+            $user->email    = Input::get('email');
+            $user->password = Hash::make(Input::get('password'));
+            $user->username    = Input::get('username');
+
+            # Try to add the user 
+            try {
+                $user->save();
+            }
+            # Fail
+            catch (Exception $e) {
+                return Redirect::to('/signup')->with('flash_message', 'Sign up failed; please try again.')->withInput();
+            }
+
+            # Log the user in
+            Auth::login($user);
+
+            return Redirect::to('/list')->with('flash_message', 'Welcome to HERoes in STEM!');
+
+        }
+    )
+);
+
+Route::get('/login',
+    array(
+        'before' => 'guest',
+        function() {
+            return View::make('login');
+        }
+    )
+);
+
+Route::post('/login', 
+    array(
+        'before' => 'csrf', 
+        function() {
+
+            $credentials = Input::only('email', 'password');
+
+            if (Auth::attempt($credentials, $remember = true)) {
+                return Redirect::intended('/')->with('flash_message', 'Welcome Back!' + Auth::user()->name);
+            }
+            else {
+                return Redirect::to('/login')->with('flash_message', 'Log in failed; please try again.');
+            }
+
+            return Redirect::to('login');
+        }
+    )
+);
+
+Route::get('/logout', function() {
+
+    # Log out
+    Auth::logout();
+
+    # Send them to the homepage
+    return Redirect::to('/');
+
 });
 
-Route::get('/profile', function()
-{
-	return View::make('profile');
-});
+Route::get('/list',
+	array(
+		'before' => 'auth',
+		function() {
+			// $heroList=  new HeroList(app_path().'/database/heroes.json');
+			$query = Input::get('query');
+			if($query){
+				//search for query 
+				//$heroes = $heroList->search($query);
+					$heroes = Hero::where('name', 'LIKE', "%$query%")
+						->get();
+			}
+			else{
+				//get all heroes
+				//$heroes = $heroList->get_heroes();
+				$heroes = Hero::all();
 
-// Route::get('/hero/', function() {
-// 	return View::make('hero');
-// });
+			}
+			return View::make('list')
+				->with('heroes', $heroes)
+				->with('query', $query);
+		}
+	)
+);
+
+Route::get('/profile',
+	array(
+		'before' => 'auth',
+		function() {
+			return View::make('profile');
+		}
+	)
+);
 
  Route::get('/hero/edit/{hero}', function() {
 
 });
 
-  Route::get('hero/add/', function() {
-  	return View::make('addHero');
-});
+  Route::get('hero/add/',
+  	array(
+		'before' => 'auth',
+		function() {
+  			return View::make('addHero');
+  		}
+  	)
+);
 
   Route::post('hero/add/', function() {
 
@@ -71,15 +156,6 @@ Route::get('/profile', function()
   		//->with('flash_message', 'Added Hero!');
 });
 
-  Route::get('mysql-test', function() {
-
-    # Use the DB component to select all the databases
-    $results = DB::select('SHOW DATABASES;');
-
-    # If the "Pre" package is not installed, you should output using print_r instead
-    return Pre::render($results);
-
-});
 
 # Quickly seed from lecture
 Route::get('/seed', function() {
