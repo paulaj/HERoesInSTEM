@@ -8,7 +8,7 @@ Welcome to HERoes In STEM
 	@if($userid == Auth::user()->id)
 		<h1>Your Profile</h1> <span class="help-block"> <a href='/edit/profile'>edit profile</a> </span>
 	@else
-	    <h1>{{User::where('id','=',$userid)->first()->username}}'s Profile</h1>
+	    <h1 class="text-uppercase">{{User::where('id','=',$userid)->first()->username}}'s Profile</h1>
 	@endif
 
 	<br><br>

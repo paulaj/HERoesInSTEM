@@ -5,7 +5,7 @@ Welcome to HERoes In STEM
 @stop
 
 @section('content')
-<h2>Library of HERoes</h2>
+<h2 class= "yellow">Library of HERoes</h2>
 
 <br><br>
 
@@ -19,7 +19,7 @@ Welcome to HERoes In STEM
 Don't see a hero you like? <a href='/add/hero'>Add them to the list here!</a>
 	<br><br>
 
-<h3>Browse HERoes</h3>
+<h3 class= "yellow">Browse HERoes</h3>
 
 @if(!empty(trim($query)))
 	<p>You searched for <strong>{{{ $query }}}</strong></p>
@@ -33,7 +33,7 @@ Don't see a hero you like? <a href='/add/hero'>Add them to the list here!</a>
 @foreach($heroes as $name => $hero)
 
 	<section>
-	<h4>{{ $hero['name'] }}</h4>
+	<h4 class= "teal">{{ $hero['name'] }}</h4>
 	<img class='picture' src='{{ $hero['photo'] }}'>
 	
 
@@ -42,7 +42,10 @@ Don't see a hero you like? <a href='/add/hero'>Add them to the list here!</a>
 	</div>
 
 	<div class='tags'>
-	
+	Tags:
+	@foreach($hero->tags as $tag)
+		<em>{{ $tag->name }}, </em>
+	@endforeach
 	
 	</div> 
 	<a href='{{ $hero['more_info_link'] }}'> Go to Wikipedia Entry</a> |<a href='/'>+ Add this hero to your HERoes.</a> |<a href='/edit/hero/{{$hero["id"]}}'> Edit hero</a>

@@ -23,4 +23,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+	public function tags() {
+ 		return $this->belongsToMany('Tag');
+ 	}
+
+ 	public function heroes() {
+ 		return $this->belongsToMany('Hero');
+ 	}
+
 }

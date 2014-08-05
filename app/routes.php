@@ -71,7 +71,7 @@ Route::post('/login',
             $credentials = Input::only('email', 'password');
 
             if (Auth::attempt($credentials, $remember = true)) {
-                return Redirect::intended('/')->with('flash_message', 'Welcome Back!' + Auth::user()->name);
+                return Redirect::intended('/')->with('flash_message', 'Welcome Back, ' . Auth::user()->username .  "!");
             }
             else {
                 return Redirect::to('/login')->with('flash_message', 'Log in failed; please try again.');
@@ -102,6 +102,9 @@ Route::get('/list',
 				//search for query 
 				//$heroes = $heroList->search($query);
 					$heroes = Hero::where('name', 'LIKE', "%$query%")
+						->orWhereHas('tags', function($q) use($query) {
+							$q->where('name', 'LIKE', "%$query%");
+						})
 						->get();
 			}
 			else{
@@ -116,6 +119,30 @@ Route::get('/list',
 		}
 	)
 );
+
+Route::get('/users',
+	array(
+		'before' => 'auth',
+		function() {
+			$query = Input::get('query');
+			if($query){
+					$users = User::where('username', 'LIKE', "%$query%")
+						->orWhereHas('tags', function($q) use($query) {
+							$q->where('name', 'LIKE', "%$query%");
+						})
+						->get();
+			}
+			else{
+				$users = User::all();
+
+			}
+			return View::make('userList')
+				->with('users', $users)
+				->with('query', $query);
+		}
+	)
+);
+
 
 Route::get('/profile/{userid}',
 	array(
@@ -143,8 +170,11 @@ Route::post('/edit/profile',
 			$user = User::find(Auth::user()->id);
 
 			$user->about = Input::get('about');
-
+  			$tag= new Tag;
+  			$tag->name = 'math';
+			$tag->save();
 			$user->save();
+			$user->tags()->attach($tag);
 
 		  	return Redirect::to('/profile/' . Auth::user()->id);
 		}
@@ -174,6 +204,8 @@ Route::post('/edit/profile',
 			$hero->more_info_link = Input::get('more_info_link');
 
 
+		
+
 			$hero->save();
 
 		  	return Redirect::to('/list');
@@ -199,8 +231,6 @@ Route::post('/edit/profile',
 	$hero->born = Input::get('born');
 	$hero->photo = Input::get('photo');
 	$hero->more_info_link = Input::get('more_info_link');
-
-
 	$hero->save();
 
   	return Redirect::to('/list');
@@ -214,10 +244,19 @@ Route::get('/seed', function() {
 	# Clear the tables to a blank slate
 	DB::statement('SET FOREIGN_KEY_CHECKS=0');
 	DB::statement('TRUNCATE heroes');
+	DB::statement('TRUNCATE tags');
 
+	$tag_math = new Tag;
+	$tag_math->name = 'math';
+	$tag_math->save();
+	$tag_comp = new Tag;
+	$tag_comp->name = 'computers';
+	$tag_comp->save();
+	$tag_astro = new Tag;
+	$tag_astro->name = 'astronomy';
+	$tag_astro->save();
 
 	$hero = new Hero();
-
 	$hero->name = 'Ada Lovelace';
 	$hero->description = "Augusta Ada King, Countess of Lovelace (10 December 1815 – 27 November 1852), born Augusta Ada Byron and now commonly known as Ada Lovelace, was an English mathematician and writer chiefly known for her work on Charles Babbage's early mechanical general-purpose computer, the Analytical Engine. 
 	Her notes on the engine include what is recognised as the first algorithm intended to be carried out by a machine. Because of this, she is often described as the world's first computer programmer.Lovelace was born 10 December 1815 as the only child of the poet Lord Byron and his wife Anne Isabella Byron. All Byron's other children were born out of wedlock to other women. Byron separated from his wife a month after Ada was born and left England forever four months later, eventually dying of disease in the Greek War of Independence when Ada was eight years old. Ada's mother remained bitter at Lord Byron and promoted Ada's interest in mathematics and logic in an effort to prevent her from developing what she saw as the insanity seen in her father, but Ada remained interested in him despite this (and was, upon her eventual death, buried next to him at her request). 
@@ -225,9 +264,9 @@ Route::get('/seed', function() {
 	$hero->born = 1815;
 	$hero->photo = 'http://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Ada_Lovelace_portrait.jpg/640px-Ada_Lovelace_portrait.jpg';
 	$hero->more_info_link = 'http://en.wikipedia.org/wiki/Ada_Lovelace';
-
-	# Magic: Eloquent
 	$hero->save();
+	$hero->tags()->attach($tag_math);
+	$hero->tags()->attach($tag_comp);
 
 	$hero = new Hero();
 
@@ -236,9 +275,9 @@ Route::get('/seed', function() {
 	$hero->born = 1868;
 	$hero->photo = 'http://upload.wikimedia.org/wikipedia/commons/3/3b/Leavitt_aavso.jpg';
 	$hero->more_info_link = 'http://en.wikipedia.org/wiki/Henrietta_Swan_Leavitt';
-
-	# Magic: Eloquent
 	$hero->save();
+	$hero->tags()->attach($tag_comp);
+	$hero->tags()->attach($tag_astro);
 
 	
 	return Redirect::to('/list');

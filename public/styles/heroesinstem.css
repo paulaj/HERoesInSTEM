@@ -22,5 +22,19 @@ body{
 	text-indent:50px;
 }
 .flash-message{
-	color:white;
+	color:black;
+}
+
+.teal{
+	color:lightseagreen;
+}
+
+.yellow{
+	color:#FFCB00;
+}
+
+.header{
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	color:#FFCB00;
+	
 }
