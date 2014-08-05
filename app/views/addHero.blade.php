@@ -5,21 +5,29 @@ Welcome to HERoes In STEM
 @stop
 
 @section('content')
-<h1>Add a new HERo</h1>
-
-<a href='/profile'>View Profile</a> |
-<a href='/list'>View all HERoes</a> | <a href='/'>Back to Home</a>
+<h1>Add a brand new HERo</h1>
 
 <br><br>
 
 
-{{ Form::open(array('url' => '/hero/add', 'method' => 'POST')) }}
+{{ Form::open(array('url' => '/add/hero', 'method' => 'POST')) }}
 
-	Name: {{ Form::text('name') }} <br>
-	Desciption: {{ Form::text('description') }} <br>
-	Year of Birth (YYYY): {{ Form::text('born') }} <br>
-	Picture URL: {{ Form::text('photo') }} <br>
-	Link to WikiPage: {{ Form::text('more_info_link') }} <br>
+	<div class='form-group'>
+	{{ Form::label('name', 'Name:') }}
+	{{ Form::text('name') }} <br>
+	<div class='form-group'>
+	{{ Form::label('description', 'Description:') }}<br>
+	 {{ Form::textarea('description') }} <br>
+	<div class='form-group'>
+	{{ Form::label('born', 'Year of Birth (YYYY):') }}
+	{{ Form::text('born') }} <br>
+	<div class='form-group'>
+	{{ Form::label('photo', 'Picture URL:') }}
+	{{ Form::text('photo') }} <br>
+	<div class='form-group'>
+	{{ Form::label('more_info_link', 'Link to WikiPage:') }}
+	{{ Form::text('more_info_link') }} <br>
+	<div class='form-group'>
 
 	{{ Form::submit('Add this new HERo!') }}
 

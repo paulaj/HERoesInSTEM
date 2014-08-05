@@ -14,12 +14,14 @@
         
 @endif
 
+<h1>HERoes In STEM</h1>
+
 @if(Auth::check())
-    <a href='/logout'>Log out {{ Auth::user()->username; }}</a>
+    <a href='/'>Home</a>|<a href='/profile/{{Auth::user()->id}}'>Your Profile</a> | <a href='/list'>Library of HERoes</a> | <a href='/logout'>Log out {{ Auth::user()->username; }}</a>
 @else 
     <a href='/signup'>Sign up</a> | <a href='/login'>Log in</a>
 @endif
-
+<br/><br/>
 @yield('head')
 
 </head>

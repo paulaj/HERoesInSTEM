@@ -88,7 +88,7 @@ Route::get('/logout', function() {
     Auth::logout();
 
     # Send them to the homepage
-    return Redirect::to('/');
+    return Redirect::to('/login');
 
 });
 
@@ -117,20 +117,71 @@ Route::get('/list',
 	)
 );
 
-Route::get('/profile',
+Route::get('/profile/{userid}',
 	array(
 		'before' => 'auth',
-		function() {
-			return View::make('profile');
+		function($userid) {
+			return View::make('profile')
+				->with('userid', $userid);
 		}
 	)
 );
 
- Route::get('/hero/edit/{hero}', function() {
+Route::get('/edit/profile',
+	array(
+		'before' => 'auth',
+		function() {
+			return View::make('editProfile');
+		}
+	)
+);
 
-});
+Route::post('/edit/profile',
+	array(
+		'before' => 'auth',
+		function() {
+			$user = User::find(Auth::user()->id);
 
-  Route::get('hero/add/',
+			$user->about = Input::get('about');
+
+			$user->save();
+
+		  	return Redirect::to('/profile/' . Auth::user()->id);
+		}
+	)
+);
+
+ Route::get('/edit/hero/{heroid}',
+	array(
+		'before' => 'auth',
+		function($heroid) {
+			return View::make('editHero')
+				->with('heroid', $heroid);
+		}
+	)
+ );
+
+ Route::post('/edit/hero/{heroid}',
+	array(
+		'before' => 'auth',
+		function($heroid) {
+			$hero = Hero::find($heroid);
+
+			$hero->name = Input::get('name');
+			$hero->description = Input::get('description');
+			$hero->born = Input::get('born');
+			$hero->photo = Input::get('photo');
+			$hero->more_info_link = Input::get('more_info_link');
+
+
+			$hero->save();
+
+		  	return Redirect::to('/list');
+		}
+	)
+);
+
+  Route::get('/add/hero',
   	array(
 		'before' => 'auth',
 		function() {
@@ -139,7 +190,7 @@ Route::get('/profile',
   	)
 );
 
-  Route::post('hero/add/', function() {
+  Route::post('add/hero', function() {
 
 	$hero = new Hero();
 
@@ -193,16 +244,6 @@ Route::get('/seed', function() {
 	return Redirect::to('/list');
 
 
-
-});
-
-
-
-Route::get('/mysql-connection-test', function() {
-
-$results = DB::select('SHOW DATABASES;');
-
-return Pre::render($results, 'Results');
 
 });
 

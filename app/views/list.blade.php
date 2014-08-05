@@ -5,13 +5,9 @@ Welcome to HERoes In STEM
 @stop
 
 @section('content')
-<h1>Welcome to HERoes In STEM</h1>
-
-<a href='/profile'>View Profile</a> |
-<a href='/hero/add'>+ Add new HERo</a> | <a href='/'>Back to Home</a>
+<h2>Library of HERoes</h2>
 
 <br><br>
-
 
 {{ Form::open(array('url' => '/list', 'method' => 'GET')) }}
 
@@ -20,8 +16,10 @@ Welcome to HERoes In STEM
 {{ Form::submit('Search!') }}
 
 {{ Form::close() }}
-
+Don't see a hero you like? <a href='/add/hero'>Add them to the list here!</a>
 	<br><br>
+
+<h3>Browse HERoes</h3>
 
 @if(!empty(trim($query)))
 	<p>You searched for <strong>{{{ $query }}}</strong></p>
@@ -35,7 +33,7 @@ Welcome to HERoes In STEM
 @foreach($heroes as $name => $hero)
 
 	<section>
-	<h2>{{ $hero['name'] }}</h2>
+	<h4>{{ $hero['name'] }}</h4>
 	<img class='picture' src='{{ $hero['photo'] }}'>
 	
 
@@ -47,7 +45,7 @@ Welcome to HERoes In STEM
 	
 	
 	</div> 
-	<a href='{{ $hero['more_info_link'] }}'> Go to Wikipedia Entry</a> |<a href='/hero/add'>+ Add this hero to your HERoes.</a> |<a href='/hero/edit'> Edit hero</a>
+	<a href='{{ $hero['more_info_link'] }}'> Go to Wikipedia Entry</a> |<a href='/'>+ Add this hero to your HERoes.</a> |<a href='/edit/hero/{{$hero["id"]}}'> Edit hero</a>
 	
 
 	</section>

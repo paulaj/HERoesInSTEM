@@ -5,10 +5,9 @@ Welcome to HERoes In STEM
 @stop
 
 @section('content')
-<h1>Welcome to HERoes In STEM</h1>
-<br/><br/>
 <center>
-
+<h2>Welcome to HERoes In STEM</h2>
+<br/><br/>
 <h3>What is this place?</h3>
 <br/>
 <p class="info "> HERoes in STEM is a site dedicated to letting users find their Lady STEM heroes, allowing users to share their STEM accomplishments, and increasing visibilty of STEM role models from history, fiction, and the present.</p>
@@ -29,7 +28,9 @@ Welcome to HERoes In STEM
 <p class="info">What better way to boost thier confidence then to have you tell them? Everyone starts somewhere, and even little steps can be amazing. Users telling other users when they admire them for their little steps can lead to some more little steps and possibly a REALLY big step.  </p>
 	Let's cheer each other on as we become the best STEM girls we can be! </p>
 <br/>
-<a href='/list'>View all HERoes</a> | <a href='/profile'>View Profile</a> 
+
+
+
 </center>
 
 

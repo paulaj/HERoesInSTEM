@@ -10,6 +10,7 @@ body{
 	float:left;
 }
 .description{
+	padding-top:20px;
 	color:teal;
 }
 .tags{
