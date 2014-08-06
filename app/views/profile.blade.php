@@ -61,25 +61,55 @@ Welcome to HERoes In STEM
 
 		
 	@else
-		<h3>About {{$thisuser->username}} </h3>
-		<p class="description"> {{$thisuser->about}} </p>
-		<h5>{{$thisuser->username}} has {{$likedby}} admirers </h5>
-		<br/><br/>
+		<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">About {{$thisuser->username}}</h3>
+  			</div>
+  			<div class="panel-body">
+    			<p class="description"> {{$thisuser->about}} </p>
+				<h5>{{$thisuser->username}} has {{$likedby}} admirers </h5>
+  			</div>
+		</div>
 
-		<h3>Interests </h3>	
-		@foreach($thisuser->tags as $tag)
-			<h5>{{ $tag->name }} </h5>
-		@endforeach
 
-		<h3>Personal Heroes </h3>
-		@foreach($thisuser->heroes as $hero)
-			<h5>{{ $hero->name }} </h5>
-		@endforeach	
-		<h3>People {{$thisuser->username}} Admires </h3>
-		@foreach($likes as $liked)
-			<h5> {{ User::find($liked->liked_id)->username }} </h5>
-		@endforeach	
+		<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">Interests</h3>
+  			</div>
+  			<div class="panel-body">
+    			@foreach($thisuser->tags as $tag)
+				<h5>{{ $tag->name }} </h5>
+				@endforeach
+  			</div>
+		</div>
+
+		<div class="panel panel-default">
+  			<div class="panel-heading">
+    			<h3 class="panel-title">Personal Heroes</h3>
+  			</div>
+  			<div class="panel-body">
+    			@foreach($thisuser->heroes as $hero)
+				<h5>{{ $hero->name }} </h5>
+				@endforeach	
+  			</div>
+		</div>
+
+		<div class="panel panel-default teal">
+  			<div class="panel-heading ">
+    			<h3 class="panel-title">People You Admire</h3>
+  			</div>
+  			<div class="panel-body">
+    			@foreach($likes as $liked)
+				<h5> {{ User::find($liked->liked_id)->username }} </h5>
+				@endforeach
+  			</div>
+		</div>
+
+
+
 	@endif
+
+
 </div>
 	
 
