@@ -20,7 +20,8 @@ Welcome to HERoes In STEM
 
 <h3 class= "yellow">Browse User Directory</h3>
 
-@if(!empty(trim($query)))
+<?php $trimmedQuery = trim($query); ?>
+@if(!empty($trimmedQuery))
 	<p>You searched for <strong>{{{ $query }}}</strong></p>
 
 	@if(count($users) == 0)

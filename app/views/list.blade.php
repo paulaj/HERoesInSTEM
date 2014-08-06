@@ -20,8 +20,8 @@ Don't see a hero you like? <a href='/add/hero'>Add them to the list here!</a>
 	<br><br>
 
 <h3 class= "yellow">Browse HERoes</h3>
-
-@if(!empty(trim($query)))
+<?php $trimmedQuery = trim($query); ?>
+@if(!empty($trimmedQuery))
 	<p>You searched for <strong>{{{ $query }}}</strong></p>
 
 	@if(count($heroes) == 0)
