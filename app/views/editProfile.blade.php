@@ -19,6 +19,15 @@ Welcome to HERoes In STEM
 	{{ Form::textarea('about', Auth::user()->about) }}
 	</div>
 
+	<div class='form-group'>
+		{{ Form::label('interests', 'Interests:') }} <br/>
+		@foreach(Tag::all() as $tag)
+			{{ Form::label('tags' . $tag->id, $tag-> name) }} 
+			{{ Form::checkbox('tag[]', $tag->id, Auth::user()->tags->contains($tag->id) ) }}
+			<br/>
+		@endforeach
+	</div>
+
 	{{ Form::submit('Save') }}
 
 {{ Form::close() }}

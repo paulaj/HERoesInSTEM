@@ -41,7 +41,7 @@ Welcome to HERoes In STEM
 	<div class='tags'>
 	{{ $user->username }}'s Interests:
 	@foreach($user->tags as $tag)
-		<em class='teal'>{{ $tag->name }} </em>,
+		<em class='teal'>{{ $tag->name }} </em>
 	@endforeach
 	
 	

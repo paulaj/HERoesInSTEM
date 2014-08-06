@@ -16,12 +16,21 @@ Welcome to HERoes In STEM
 		<h3>About You </h3>
 		<p class="description"> {{$thisuser->about}} </p>
 		<h5>You have {{$likedby}} admirers </h5>
+
 		<br/><br/>
+
+		<h3>Interests </h3>	
+		@foreach(Auth::user()->tags as $tag)
+			<h5>{{ $tag->name }} </h5>
+		@endforeach
+
 		<h3>Personal Heroes </h3>	
 
 		@foreach(Auth::user()->heroes as $hero)
 			<h5>{{ $hero->name }} </h5>
 		@endforeach
+
+		
 		
 		<h3>People You Admire </h3> 
 		@foreach($likes as $liked)

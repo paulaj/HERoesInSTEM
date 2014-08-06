@@ -40,6 +40,15 @@ Welcome to HERoes In STEM
 	{{ Form::text('more_info_link', Hero::where('id','=',$heroid)->first()->more_info_link) }}
 	</div>
 
+	<div class='form-group'>
+		{{ Form::label('tags', 'Tags:') }} <br/>
+		@foreach(Tag::all() as $tag)
+			{{ Form::label('tags' . $tag->id, $tag-> name) }} 
+			{{ Form::checkbox('tag[]', $tag->id, Hero::find($heroid)->tags->contains($tag->id) ) }}
+			<br/>
+		@endforeach
+	</div>
+
 	{{ Form::submit('Save') }}
 
 {{ Form::close() }}

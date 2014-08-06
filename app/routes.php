@@ -176,14 +176,44 @@ Route::post('/edit/profile',
 			$user = User::find(Auth::user()->id);
 
 			$user->about = Input::get('about');
-  			$tag= new Tag;
-  			$tag->name = 'math';
-			$tag->save();
+  	// 		$tag= new Tag;
+  	// 		$tag->name = 'math';
+			// $tag->save();
 			$user->save();
-			$user->tags()->attach($tag);
-			$user->save();
+			
+			$all_tags=Tag::all();
 
-		  	return Redirect::to('/profile/' . Auth::user()->id);
+			$checked=Input::get('tag');
+			//if something comes back
+			if(is_array($checked)){
+				foreach ($all_tags as $tag) {
+					if(in_array($tag->id,$checked)) {
+						if(!$user->tags->contains($tag->id)){
+							$newtag=Tag::find($tag->id);
+							$user->tags()->attach($newtag);
+							$user->save();
+						}	
+					}
+					else{
+						if($user->tags->contains($tag->id)){
+							$user->tags()->detach($tag->id);
+							$user->save();
+						}
+					}
+				}
+			}
+			//if nothing comes back
+			else{
+				foreach ($all_tags as $tag) {
+					if($user->tags->contains($tag->id)){
+						$user->tags()->detach($tag->id);
+						$user->save();
+					}	
+				}
+			}
+
+			return Redirect::to('/profile/' . Auth::user()->id)
+		  					->with('flash_message', 'Your Profile has been updated');	  	
 		}
 	)
 );
@@ -209,13 +239,38 @@ Route::post('/edit/profile',
 			$hero->born = Input::get('born');
 			$hero->photo = Input::get('photo');
 			$hero->more_info_link = Input::get('more_info_link');
+			$all_tags=Tag::all();
 
+			$checked=Input::get('tag');
+			if(is_array($checked)){
+				foreach ($all_tags as $tag) {
+					if(in_array($tag->id,$checked)) {
+						if(!$hero->tags->contains($tag->id)){
+							$newtag=Tag::find($tag->id);
+							$hero->tags()->attach($newtag);
+							$hero->save();
 
-		
-
-			$hero->save();
-
-		  	return Redirect::to('/list');
+						}	
+					}
+					else{
+						if($hero->tags->contains($tag->id)){
+							$hero->tags()->detach($tag->id);
+							$hero->save();
+						}
+					}
+				}
+			}
+			//if nothing comes back
+			else{
+				foreach ($all_tags as $tag) {
+					if($hero->tags->contains($tag->id)){
+						$hero->tags()->detach($tag->id);
+						$hero->save();
+					}	
+				}
+			}
+			return Redirect::to('/list')
+			 				->with('flash_message', 'Hero has been updated!');	
 		}
 	)
 );
