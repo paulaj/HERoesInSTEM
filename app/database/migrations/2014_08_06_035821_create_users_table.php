@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration {
 	    $table->text('about');
 	    $table->timestamps();
 
-});
+		});
 	}
 
 	/**

@@ -40,10 +40,15 @@ Welcome to HERoes In STEM
 
 	<div class='tags'>
 	{{ $user->username }}'s Interests:
+	@foreach($user->tags as $tag)
+		<em class='teal'>{{ $tag->name }} </em>,
+	@endforeach
 	
 	
 	</div> 
-	<a href='/profile/{{ $user->id }}' > Go to {{ $user->username }}'s Profile </a> |<a href='/'>+ Admire this User</a>
+	<a href='/profile/{{ $user->id }}' > Go to {{ $user->username }}'s Profile </a> | {{ Form::open(array('url' => '/add/profile/admire/' . $user->id, 'method' => 'POST')) }}
+	 	<input type="submit" value="Admire this User."> 
+	 {{ Form::close() }}
 	
 
 	</section>

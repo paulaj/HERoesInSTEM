@@ -6,27 +6,40 @@ Welcome to HERoes In STEM
 
 @section('content')
 	@if($userid == Auth::user()->id)
-		<h1>Your Profile</h1> <span class="help-block"> <a href='/edit/profile'>edit profile</a> </span>
+		<h1>Your Profile </h1> <span class="help-block"> <a href='/edit/profile'>edit profile</a> </span>
 	@else
-	    <h1 class="text-uppercase">{{User::where('id','=',$userid)->first()->username}}'s Profile</h1>
+	    <h1 class="text-uppercase">{{$thisuser->username}}'s Profile</h1>
 	@endif
 
-	<br><br>
 	
 	@if($userid == Auth::user()->id)
 		<h3>About You </h3>
-		<p class="description"> {{Auth::user()->about}} </p>
-		<h5>You have # admirers </h5>
+		<p class="description"> {{$thisuser->about}} </p>
+		<h5>You have {{$likedby}} admirers </h5>
 		<br/><br/>
 		<h3>Personal Heroes </h3>	
+
+		@foreach(Auth::user()->heroes as $hero)
+			<h5>{{ $hero->name }} </h5>
+		@endforeach
+		
 		<h3>People You Admire </h3> 
+		@foreach($likes as $liked)
+			<h5> {{ User::find($liked->liked_id)->username }} </h5>
+		@endforeach	
 	@else
-		<h3>About {{User::where('id','=',$userid)->first()->username}} </h3>
-		<p class="description"> {{User::where('id','=',$userid)->first()->about}} </p>
-		<h5>{{User::where('id','=',$userid)->first()->username}} has # admirers </h5>
+		<h3>About {{$thisuser->username}} </h3>
+		<p class="description"> {{$thisuser->about}} </p>
+		<h5>{{$thisuser->username}} has {{$likedby}} admirers </h5>
 		<br/><br/>
-		<h3>Personal Heroes </h3>	
-		<h3>People {{User::where('id','=',$userid)->first()->username}} Admires </h3>
+		<h3>Personal Heroes </h3>
+		@foreach($thisuser->heroes as $hero)
+			<h5>{{ $hero->name }} </h5>
+		@endforeach	
+		<h3>People {{$thisuser->username}} Admires </h3>
+		@foreach($likes as $liked)
+			<h5> {{ User::find($liked->liked_id)->username }} </h5>
+		@endforeach	
 	@endif
 
 	

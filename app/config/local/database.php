@@ -23,7 +23,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'heroesinstem',
+			'database'  => 'rolemodels',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',

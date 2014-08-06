@@ -148,8 +148,14 @@ Route::get('/profile/{userid}',
 	array(
 		'before' => 'auth',
 		function($userid) {
+			$user = User::where('id','=',$userid)->first();
+			$likes = Like::where('likes_id','=',$user->id)->get();
+			$likedby = Like::where('liked_id','=',$user->id)->count();
 			return View::make('profile')
-				->with('userid', $userid);
+				->with('userid', $userid)
+				->with('thisuser', $user)
+				->with('likes', $likes)
+				->with('likedby', $likedby);
 		}
 	)
 );
@@ -175,6 +181,7 @@ Route::post('/edit/profile',
 			$tag->save();
 			$user->save();
 			$user->tags()->attach($tag);
+			$user->save();
 
 		  	return Redirect::to('/profile/' . Auth::user()->id);
 		}
@@ -222,7 +229,7 @@ Route::post('/edit/profile',
   	)
 );
 
-  Route::post('add/hero', function() {
+  Route::post('/add/hero', function() {
 
 	$hero = new Hero();
 
@@ -233,9 +240,53 @@ Route::post('/edit/profile',
 	$hero->more_info_link = Input::get('more_info_link');
 	$hero->save();
 
-  	return Redirect::to('/list');
-  		//->with('flash_message', 'Added Hero!');
+  	return Redirect::to('/list')
+  		->with('flash_message', 'Added Hero!');
 });
+//add hero to profile
+ Route::post('/add/profile/hero/{heroid}', function($heroid) {
+
+	$hero = Hero::find($heroid);
+
+	$user = User::find(Auth::user()->id);
+
+	if ($user->heroes->has('id', $hero->id)){
+		return Redirect::to('/profile/' . Auth::user()->id)
+  			->with('flash_message', 'Already Added Hero!');
+	}
+	else{
+		$user -> heroes()->attach($hero);
+		return Redirect::to('/profile/' . Auth::user()->id)
+		->with('flash_message', 'Added new personal Hero!');
+	}
+  	
+  		
+});
+
+//admire user
+ Route::post('/add/profile/admire/{userid}', function($userid) {
+
+	$admired = User::find($userid);
+
+	$user = User::find(Auth::user()->id);
+
+	 if (Like::where('liked_id','=',$admired->id)->where('likes_id','=',$user->id)->exists()){
+	 	return Redirect::to('/profile/' . Auth::user()->id)
+   			->with('flash_message', 'You already admire this user!');
+	 }
+	else{
+		$like= new Like();
+		$like->likes_id = $user-> id;
+		$like->liked_id = $admired-> id;
+		$like->save();
+		return Redirect::to('/profile/' . Auth::user()->id)
+		->with('flash_message', 'Admired new user!');
+	}
+  	
+  		
+});
+
+
 
 
 # Quickly seed from lecture
@@ -244,6 +295,8 @@ Route::get('/seed', function() {
 	# Clear the tables to a blank slate
 	DB::statement('SET FOREIGN_KEY_CHECKS=0');
 	DB::statement('TRUNCATE heroes');
+	DB::statement('TRUNCATE hero_user');
+	DB::statement('TRUNCATE hero_tag');
 	DB::statement('TRUNCATE tags');
 
 	$tag_math = new Tag;

@@ -48,7 +48,11 @@ Don't see a hero you like? <a href='/add/hero'>Add them to the list here!</a>
 	@endforeach
 	
 	</div> 
-	<a href='{{ $hero['more_info_link'] }}'> Go to Wikipedia Entry</a> |<a href='/'>+ Add this hero to your HERoes.</a> |<a href='/edit/hero/{{$hero["id"]}}'> Edit hero</a>
+	<a href='{{ $hero['more_info_link'] }}'> Go to Wikipedia Entry</a> |
+	 {{ Form::open(array('url' => '/add/profile/hero/' . $hero->id, 'method' => 'POST')) }}
+	 	<input type="submit" value="+ Add this hero to your HERoes."> 
+	 {{ Form::close() }}
+	 |<a href='/edit/hero/{{$hero["id"]}}'> Edit hero</a>
 	
 
 	</section>

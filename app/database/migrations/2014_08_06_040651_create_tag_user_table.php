@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserHeroTable extends Migration {
+class CreateTagUserTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,14 @@ class CreateUserHeroTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('user_hero', function($table) {
+		Schema::create('tag_user', function($table) {
 
+			$table->integer('tag_id')->unsigned();
 			$table->integer('user_id')->unsigned();
-			$table->integer('hero_id')->unsigned();
-
+			
+			$table->foreign('tag_id')->references('id')->on('tags');
 			$table->foreign('user_id')->references('id')->on('users');
-			$table->foreign('hero_id')->references('id')->on('heroes');
+			
 
 		});
 	}
@@ -30,7 +31,7 @@ class CreateUserHeroTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('user_hero');
+		Schema::drop('tag_user');
 	}
 
 }
