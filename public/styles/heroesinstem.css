@@ -1,26 +1,17 @@
 body{
 	color:gray;
 	margin:20px;
+	/*background-color:#63C9C4;*/
 	
 }
-
-.picture{
-	max-height:300px;
-	margin:20px;
-	float:left;
+hr{
+	color:#63C9C4;
+	height:15px;
 }
-.description{
-	padding-top:20px;
-	color:teal;
-}
-.tags{
-	clear:both;
+.mainsite{
+	background-color:white;
 }
 
-.info{
-	width:50%;
-	text-indent:50px;
-}
 .flash-message{
 	color:black;
 }
@@ -37,4 +28,28 @@ body{
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	color:#FFCB00;
 	
+}
+
+/*For lists*/
+.picture{
+	max-height:300px;
+	margin:20px;
+	float:left;
+}
+
+.description{
+	padding-top:20px;
+	color:teal;
+}
+.tags{
+	clear:both;
+}
+
+.info{
+	width:50%;
+	text-indent:50px;
+}
+/*for profile*/
+.profile-heading{
+	float:left;
 }

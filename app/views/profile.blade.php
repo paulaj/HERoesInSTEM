@@ -5,13 +5,14 @@ Welcome to HERoes In STEM
 @stop
 
 @section('content')
+<div class="row">
 	@if($userid == Auth::user()->id)
-		<h1>Your Profile </h1> <span class="help-block"> <a href='/edit/profile'>edit profile</a> </span>
+		<h1 class="teal profile-heading">Your Profile </h1> <span class="help-block"> <a href='/edit/profile'>edit profile</a> </span>
 	@else
 	    <h1 class="text-uppercase">{{$thisuser->username}}'s Profile</h1>
 	@endif
-
-	
+</div>
+<div class="row">
 	@if($userid == Auth::user()->id)
 		<h3>About You </h3>
 		<p class="description"> {{$thisuser->about}} </p>
@@ -50,7 +51,7 @@ Welcome to HERoes In STEM
 			<h5> {{ User::find($liked->liked_id)->username }} </h5>
 		@endforeach	
 	@endif
-
+</div>
 	
 
 @stop

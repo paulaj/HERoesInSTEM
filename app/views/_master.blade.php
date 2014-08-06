@@ -1,7 +1,10 @@
 <!doctype html>
 <html>
-<head>
 
+<div class="row">
+<div class="col-md-2 sides"></div>
+<div class="col-md-8 mainsite">
+<head>
 <title>@yield('title','HERoes In STEM')</title>
 
 <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css" rel="stylesheet">
@@ -33,5 +36,7 @@
 @yield('body')
 
 </body>
-
+</div>
+<div class="col-md-2 sides"></div>
+</div>
 </html>
