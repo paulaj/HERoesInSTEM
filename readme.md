@@ -15,7 +15,7 @@ I'd like to take it a step further. While another user may not be a full-fledged
 
 Once you sign up, you'll be logged in. If this isn't the live server, you should go to /seed so that there will be tags and heroes in the database
 
-I ran out of time to do the controllers and verification T.T
+I ran out of time to do the controllers and text input isn't verified yet so don't be evil.
 Hope you enjoy it anyway!
 
 ## Other code

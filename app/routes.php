@@ -223,6 +223,7 @@ Route::post('/edit/profile',
 			$hero->born = Input::get('born');
 			$hero->photo = Input::get('photo');
 			$hero->more_info_link = Input::get('more_info_link');
+			$hero->save();
 			$all_tags=Tag::all();
 
 			$checked=Input::get('tag');
