@@ -16,7 +16,7 @@ Welcome to HERoes In STEM
 <div class="row">
 
 	@if($userid == Auth::user()->id)
-	<div class="col-md-7">
+	<div class="col-md-8">
 		<div class="panel panel-default">
   			<div class="panel-heading">
     			<h3 class="panel-title">About You</h3>
@@ -27,7 +27,7 @@ Welcome to HERoes In STEM
   			</div>
 		</div>
 	</div>	
-	<div class="col-md-3">
+	<div class="col-md-4">
 
 		<div class="panel panel-default">
   			<div class="panel-heading">
@@ -65,7 +65,7 @@ Welcome to HERoes In STEM
 	</div>		
 	@else
 
-	<div class="col-md-7">
+	<div class="col-md-8">
 		<div class="panel panel-default">
   			<div class="panel-heading">
     			<h3 class="panel-title">About {{$thisuser->username}}</h3>
@@ -80,7 +80,7 @@ Welcome to HERoes In STEM
   			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-4">
 
 		<div class="panel panel-default">
   			<div class="panel-heading">
