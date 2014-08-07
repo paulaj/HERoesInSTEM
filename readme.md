@@ -1,25 +1,29 @@
-## Laravel PHP Framework
+##Live URL of the project:
+http://heroesinstem-pjparty.rhcloud.com/
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Description 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+ HERoes in STEM is a site dedicated to letting users find their Lady STEM heroes, allowing users to share their STEM accomplishments, and increasing visibilty of STEM role models from history, fiction, and the present.
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+ As you can see here: http://en.wikipedia.org/wiki/Women_in_STEM_fields#Social-psychological_interventions, there are two main types of social-psychological interventions that can be used to combat stereotype threat, introducing role models and self-affirmation. While this site can't replace a role model you know personally, it does increase your knowlege of the great number of important women in STEM feilds. 
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+The second intervention, self-affirmation, comes into play when you write about yourself in your profile. Users just writing about what they are good at and their accomplishments has a positive effect. 
 
-## Official Documentation
+I'd like to take it a step further. While another user may not be a full-fledged famous woman in STEM yet, they can still be pretty awesome and be doing some pretty admirable things. What better way to boost thier confidence then to have you tell them? That's why I decided to let users admire each other. If you see a person you think is awesome, just click the "admire this user" button
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+##Instructions
 
-### Contributing To Laravel
+Once you sign up, you'll be logged in. If this isn't the live server, you should go to /seed so that there will be tags and heroes in the database
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
+I ran out of time to do the controllers and verification T.T
+Hope you enjoy it anyway!
 
-### License
+## Other code
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Using Laravel
+Using Bootstrap
+
+Signup/login/logout/debug/environment set up stuff and filtering by query (with one small change cause the live server didn't like nesting) were taken from lecture, but only with my full understanding. :)
+
+Not code, but most of the stuff I used to fill my heros database was from wikipedia due to it being the fastest way to get the information, including the pictures. I'm not sure how to cite that, but I put on the page that info/pics were from wikipedia. Since this is just a first pass, and users can add new heroes without it being checked or approved, the information could be from anywhere. 
+

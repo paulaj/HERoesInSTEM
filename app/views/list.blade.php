@@ -20,6 +20,8 @@ Don't see a hero you like? <a href='/add/hero'>Add them to the list here!</a>
 	<br><br>
 
 <h3 class= "yellow">Browse HERoes</h3>
+<h6>All Photos taken from wikipedia page unless otherwise noted</h6><br/>
+
 <?php $trimmedQuery = trim($query); ?>
 @if(!empty($trimmedQuery))
 	<p>You searched for <strong>{{{ $query }}}</strong></p>
@@ -30,6 +32,8 @@ Don't see a hero you like? <a href='/add/hero'>Add them to the list here!</a>
 
 @endif
 
+<br/>
+
 @foreach($heroes as $name => $hero)
 
 	<section>
@@ -38,27 +42,27 @@ Don't see a hero you like? <a href='/add/hero'>Add them to the list here!</a>
 	
 
 	<div class='description'>
-	{{ $hero['description'] }} <br/>
+	{{ $hero['description'] }} 
+	{{ Form::open(array('url' => '/add/profile/hero/' . $hero->id, 'method' => 'POST')) }}
+		<input type="submit" value="+ Add this hero to your HERoes"> <br/>
+	{{ Form::close() }}<br/>
 	</div>
 
 	<div class='tags'>
 	Tags:
 	@foreach($hero->tags as $tag)
-		<em>{{ $tag->name }}, </em>
+		<em>{{ $tag->name }} </em>
 	@endforeach
 	
 	</div> 
 	<a href='{{ $hero['more_info_link'] }}'> Go to Wikipedia Entry</a> |
-	 {{ Form::open(array('url' => '/add/profile/hero/' . $hero->id, 'method' => 'POST')) }}
-	 	<input type="submit" value="+ Add this hero to your HERoes."> 
-	 {{ Form::close() }}
-	 |<a href='/edit/hero/{{$hero["id"]}}'> Edit hero</a>
-	
-
+	<a href='/edit/hero/{{$hero["id"]}}'> Edit hero</a>
 	</section>
 	<br/>
 
 @endforeach
+
+
 
 
 

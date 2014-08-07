@@ -14,9 +14,9 @@ Welcome to HERoes In STEM
 <br/>
 <p class="info "> HERoes in STEM is a site dedicated to letting users find their Lady STEM heroes, allowing users to share their STEM accomplishments, and increasing visibilty of STEM role models from history, fiction, and the present.</p>
 <br/>
-<h3 class= "teal">Why is this place?</h3>
+<h3 class= "teal">Why does this place exist?</h3>
 <br/>
-<p class="info"> I've been told that there are no good role models for girls in STEM and that's just a lie. There are plenty of role models, you just have to look for them! Just because you aren't taught about them in school, doesn't mean they don't exist. :) </p>
+<p class="info"> I've been told that there are no good role models for girls in STEM and that's just not true. There are plenty of role models, you just have to look for them! Just because you aren't taught about them in school, doesn't mean they don't exist. :) </p>
 <br/>
 <h3 class= "teal">What do I do in this place?</h3>
 <br/>

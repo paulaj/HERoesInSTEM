@@ -33,7 +33,7 @@ Welcome to HERoes In STEM
 @foreach($users as $user)
 
 	<section>
-	<h4>{{ $user->username }}</h4>
+	<h4><a href='/profile/{{ $user->id }}' >{{ $user->username }}</a></h4>
 	About:
 	<div class='teal'>
 	 {{ $user->about }} <br/>
@@ -47,8 +47,8 @@ Welcome to HERoes In STEM
 	
 	
 	</div> 
-	<a href='/profile/{{ $user->id }}' > Go to {{ $user->username }}'s Profile </a> | {{ Form::open(array('url' => '/add/profile/admire/' . $user->id, 'method' => 'POST')) }}
-	 	<input type="submit" value="Admire this User."> 
+	{{ Form::open(array('url' => '/add/profile/admire/' . $user->id, 'method' => 'POST')) }}
+	 	<input type="submit" value="Admire this User"> 
 	 {{ Form::close() }}
 	
 
