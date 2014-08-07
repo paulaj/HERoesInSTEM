@@ -29,6 +29,15 @@ Welcome to HERoes In STEM
 	{{ Form::text('more_info_link') }} <br>
 	<div class='form-group'>
 
+	<div class='form-group'>
+		{{ Form::label('tags', 'Tags:') }} <br/>
+		@foreach(Tag::all() as $tag)
+			{{ Form::label('tags' . $tag->id, $tag-> name) }} 
+			{{ Form::checkbox('tag[]', $tag->id, false ) }}
+			<br/>
+		@endforeach
+	</div>
+
 	{{ Form::submit('Add this new HERo!') }}
 
 {{ Form::close() }}

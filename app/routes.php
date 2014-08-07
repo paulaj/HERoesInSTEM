@@ -279,6 +279,16 @@ Route::post('/edit/profile',
 	$hero->more_info_link = Input::get('more_info_link');
 	$hero->save();
 
+	$checked=Input::get('tag');
+	if(is_array($checked)){
+		foreach ($checked as $tag) {
+			$newtag=Tag::find($tag);
+			$hero->tags()->attach($newtag);
+			$hero->save();
+		}
+	}
+	
+
   	return Redirect::to('/list')
   		->with('flash_message', 'Added Hero!');
 });
